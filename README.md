@@ -24,13 +24,18 @@ Run ,
 
 `./gtodo`
 
-## INSTALLING
+If you want you can install by copying into any $PATH
 
-copy into any $PATH
-
-example,
+For example,
 
 `cp gtodo $GOPATH/bin`
+
+
+## INSTALLING
+
+Using Gtodo is easy. First, use go get to install the latest version of the library. This command will install the `gtodo` generator executable along with the library and its dependencies:
+
+`go get -u github.com/mrinjamul/gtodo`
 
 ## License
 
