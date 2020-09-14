@@ -13,63 +13,38 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
 package cmd
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"sort"
-	"text/tabwriter"
 
 	"github.com/mrinjamul/gtodo/todo"
 	"github.com/spf13/cobra"
 )
 
-// listCmd represents the list command
-var listCmd = &cobra.Command{
-	Use:     "list",
-	Aliases: []string{"ls"},
-	Short:   "list all todos",
-	Long:    ``,
-	Run:     listRun,
+// versionCmd represents the version command
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "Print the version number of gtodo",
+	Long:  ``,
+	Run:   version,
 }
 
-func listRun(cmd *cobra.Command, args []string) {
-	items, err := todo.ReadItems(dataFile)
-	if err != nil {
-		log.Printf("%v", err)
-	}
-
-	sort.Sort(todo.ByPri(items))
-
-	w := tabwriter.NewWriter(os.Stdout, 3, 0, 1, ' ', 0)
-	for _, i := range items {
-		if allOpt || i.Done == doneOpt {
-			fmt.Fprintln(w, i.Label()+"\t"+i.PrettyDone()+"\t"+i.PrettyP()+"\t"+i.Text+"\t")
-		}
-	}
-	w.Flush()
+func version(cmd *cobra.Command, args []string) {
+	fmt.Println("gtodo version", todo.GetVersion())
 }
-
-var (
-	doneOpt bool
-	allOpt  bool
-)
 
 func init() {
-	rootCmd.AddCommand(listCmd)
+	rootCmd.AddCommand(versionCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// listCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// versionCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// listCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	listCmd.Flags().BoolVarP(&doneOpt, "done", "d", false, "Show 'Done' Todos")
-	listCmd.Flags().BoolVarP(&allOpt, "all", "a", false, "Show all TOdos")
-
+	// versionCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

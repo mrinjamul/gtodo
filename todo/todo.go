@@ -29,6 +29,13 @@ type Item struct {
 	Done     bool
 }
 
+var version string = "v0.1.0"
+
+// GetVersion : returns version info
+func GetVersion() string {
+	return version
+}
+
 // SaveItems : save data
 func SaveItems(filename string, items []Item) error {
 	b, err := json.Marshal(items)
