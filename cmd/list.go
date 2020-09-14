@@ -17,7 +17,7 @@ package cmd
 
 import (
 	"fmt"
-	"log"
+	"io/ioutil"
 	"os"
 	"sort"
 	"text/tabwriter"
@@ -37,8 +37,13 @@ var listCmd = &cobra.Command{
 
 func listRun(cmd *cobra.Command, args []string) {
 	items, err := todo.ReadItems(dataFile)
+
 	if err != nil {
-		log.Printf("%v", err)
+		file := []byte("[]")
+		err = ioutil.WriteFile(dataFile, file, 0644)
+	}
+	if len(items) == 0 {
+		fmt.Println("Empty Todo list")
 	}
 
 	sort.Sort(todo.ByPri(items))

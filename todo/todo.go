@@ -29,10 +29,14 @@ type Item struct {
 	Done     bool
 }
 
-var version string = "v0.1.0"
+var version string = "v0.1.1"
 
 // GetVersion : returns version info
 func GetVersion() string {
+	// file, _ := ioutil.ReadFile("version.txt")
+	// var version string
+	// version = string(file)
+	// version = strings.TrimSuffix(version, "\n")
 	return version
 }
 

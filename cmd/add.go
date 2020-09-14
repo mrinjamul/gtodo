@@ -17,7 +17,7 @@ package cmd
 
 import (
 	"fmt"
-	"log"
+	"io/ioutil"
 
 	"github.com/mrinjamul/gtodo/todo"
 	"github.com/spf13/cobra"
@@ -35,7 +35,8 @@ var addCmd = &cobra.Command{
 func addRun(cmd *cobra.Command, args []string) {
 	items, err := todo.ReadItems(dataFile)
 	if err != nil {
-		log.Printf("%v", err)
+		file := []byte("[]")
+		err = ioutil.WriteFile(dataFile, file, 0644)
 	}
 	for _, x := range args {
 		item := todo.Item{Text: x}
@@ -43,8 +44,9 @@ func addRun(cmd *cobra.Command, args []string) {
 		items = append(items, item)
 	}
 	err = todo.SaveItems(dataFile, items)
+	fmt.Println("+ new todo added")
 	if err != nil {
-		fmt.Errorf("%v", err)
+		fmt.Println(err)
 	}
 }
 
