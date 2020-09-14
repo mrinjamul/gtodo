@@ -41,7 +41,7 @@ func doneRun(cmd *cobra.Command, args []string) {
 	if err != nil {
 		log.Fatalln(args[0], "is not a valid label\n", err)
 	}
-	if i > 0 && i < len(items) {
+	if i > 0 && i <= len(items) {
 		items[i-1].Done = true
 		fmt.Printf("%q %v\n", items[i-1].Text, "marked done")
 
