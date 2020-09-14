@@ -10,19 +10,19 @@ echo ""
 echo "Building for Linux AMD64" &&
 sleep 1 &&
 env GOOS=linux GOARCH=amd64 go build . &&
-tar cJf releases/gtodo-linux-amd64-$VERSION.tar.xz gtodo &&
+zip -r releases/gtodo-linux-amd64-$VERSION.zip gtodo &&
 echo "Built for Linux AMD64"
 echo ""
 echo "Building for Linux ARM" &&
 sleep 1 &&
 env GOOS=linux GOARCH=arm go build . &&
-tar cJf releases/gtodo-linux-arm-$VERSION.tar.xz gtodo &&
+zip -r releases/gtodo-linux-arm-$VERSION.zip gtodo &&
 echo "Built for Linux ARM"
 echo ""
 echo "Building for Mac AMD64" &&
 sleep 1 &&
 env GOOS=darwin GOARCH=amd64 go build . &&
-tar cJf releases/gtodo-darwin-amd64-$VERSION.tar.xz gtodo &&
+zip -r releases/gtodo-darwin-amd64-$VERSION.zip gtodo &&
 echo "Built for Mac AMD64"
 echo ""
 
