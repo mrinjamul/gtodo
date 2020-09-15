@@ -29,7 +29,7 @@ type Item struct {
 	Done     bool
 }
 
-var version string = "v0.1.1"
+var version string = "v0.2.0"
 
 // GetVersion : returns version info
 func GetVersion() string {
@@ -63,7 +63,7 @@ func ReadItems(filename string) ([]Item, error) {
 	if err := json.Unmarshal(b, &items); err != nil {
 		return []Item{}, err
 	}
-	for i, _ := range items {
+	for i := range items {
 		items[i].position = i + 1
 	}
 	return items, nil
@@ -121,4 +121,9 @@ func (i *Item) PrettyDone() string {
 		return "X"
 	}
 	return ""
+}
+
+// RemoveItem removes todo from list
+func RemoveItem(slice []Item, s int) []Item {
+	return append(slice[:s], slice[s+1:]...)
 }

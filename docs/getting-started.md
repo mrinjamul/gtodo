@@ -16,6 +16,9 @@ command and flag definitions are needed.
     done        Mark Item as Done
     help        Help about any command
     list        list all todos
+    modify      edit a todo
+    remove      Remove a todo
+    undone      Mark Item as UnDone
     version     Print the version number of gtodo
 
     Flags:
@@ -38,6 +41,40 @@ command and flag definitions are needed.
     Flags:
     -h, --help           help for add
     -p, --priority int   Priority:1,2,3 (default 2)
+
+    Global Flags:
+        --config string     config file (default is $HOME/.gtodo.yaml)
+        --datafile string   data file to store todos (default "$HOME/.gtodo.json")
+
+### remove
+
+    Remove will remove a todo item from the list by Label(index)
+
+    Usage:
+    gtodo remove [flags]
+
+    Aliases:
+    remove, rm
+
+    Flags:
+    -h, --help   help for remove
+
+    Global Flags:
+        --config string     config file (default is $HOME/.gtodo.yaml)
+        --datafile string   data file to store todos (default "$HOME/.gtodo.json")
+
+### modify
+
+    edit a todo
+
+    Usage:
+    gtodo modify [flags]
+
+    Aliases:
+    modify, mod, ed
+
+    Flags:
+    -h, --help   help for modify
 
     Global Flags:
         --config string     config file (default is $HOME/.gtodo.yaml)
@@ -75,6 +112,23 @@ Mark Item as Done
         --config string     config file (default is $HOME/.gtodo.yaml)
         --datafile string   data file to store todos (default "$HOME/.gtodo.json")
 
+### undo
+
+    Mark Item as UnDone
+
+    Usage:
+    gtodo undone [flags]
+
+    Aliases:
+    undone, undo
+
+    Flags:
+    -h, --help   help for undone
+
+    Global Flags:
+        --config string     config file (default is $HOME/.gtodo.yaml)
+        --datafile string   data file to store todos (default "$HOME/.gtodo.json")
+
 ### list
 
     list all todos
@@ -96,4 +150,4 @@ Mark Item as Done
 
 ### version
 
-Prints current version of gtodo
+    Prints current version of gtodo
