@@ -35,17 +35,19 @@ var modifyCmd = &cobra.Command{
 }
 
 func modifyRun(cmd *cobra.Command, args []string) {
+	if len(args) == 0 {
+		log.Fatalln("Too short argument")
+	} else if len(args) == 1 {
+		log.Fatalln("todo name is empty")
+	} else if len(args) > 2 {
+		log.Fatalln("Too much arguments")
+	}
 	items, err := todo.ReadItems(dataFile)
 	i, err := strconv.Atoi(args[0])
 	if err != nil {
 		log.Fatalln(args[0], "is not a valid label\ninvalid syntax")
 	}
-	if len(args) == 1 {
-		log.Fatalln("todo name is empty")
-	}
-	if len(args) > 2 {
-		log.Fatalln("Too much arguments")
-	}
+
 	text := args[1]
 	if i > 0 && i <= len(items) {
 		items[i-1].Text = text
