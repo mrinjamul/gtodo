@@ -43,11 +43,13 @@ func addRun(cmd *cobra.Command, args []string) {
 		file := []byte("[]")
 		err = ioutil.WriteFile(dataFile, file, 0644)
 	}
+	var todoName string
 	for _, x := range args {
-		item := todo.Item{Text: x}
-		item.SetPriority(priority)
-		items = append(items, item)
+		todoName += x + " "
 	}
+	item := todo.Item{Text: todoName}
+	item.SetPriority(priority)
+	items = append(items, item)
 	err = todo.SaveItems(dataFile, items)
 	fmt.Println("+ new todo added")
 	if err != nil {
