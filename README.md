@@ -4,7 +4,7 @@
 
 Clone repository
 
-`git clone [repo location]`
+`git clone https://github.com/mrinjamul/gtodo`
 
 `cd gtodo`
 
@@ -16,13 +16,13 @@ Build
 
 `go build`
 
-Create data files
-
-`touch $HOME/.gtodo.json`
-
 Run ,
 
 `./gtodo`
+
+Install
+
+`go install gtodo`
 
 If you want you can install by copying into any \$PATH
 
@@ -62,6 +62,9 @@ command and flag definitions are needed.
     done        Mark Item as Done
     help        Help about any command
     list        list all todos
+    modify      edit a todo
+    remove      Remove a todo
+    undone      Mark Item as UnDone
     version     Print the version number of gtodo
 
     Flags:

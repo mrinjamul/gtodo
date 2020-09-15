@@ -75,6 +75,6 @@ func init() {
 	// is called directly, e.g.:
 	// listCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	listCmd.Flags().BoolVarP(&doneOpt, "done", "d", false, "Show 'Done' Todos")
-	listCmd.Flags().BoolVarP(&allOpt, "all", "a", false, "Show all TOdos")
+	listCmd.Flags().BoolVarP(&allOpt, "all", "a", false, "Show All Todos")
 
 }

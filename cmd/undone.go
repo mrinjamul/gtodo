@@ -13,6 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
 package cmd
 
 import (
@@ -25,16 +26,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// doneCmd represents the done command
-var doneCmd = &cobra.Command{
-	Use:     "done",
-	Aliases: []string{"do"},
-	Short:   "Mark Item as Done",
+// undoneCmd represents the undone command
+var undoneCmd = &cobra.Command{
+	Use:     "undone",
+	Aliases: []string{"undo"},
+	Short:   "Mark Item as UnDone",
 	Long:    ``,
-	Run:     doneRun,
+	Run:     undoneRun,
 }
 
-func doneRun(cmd *cobra.Command, args []string) {
+func undoneRun(cmd *cobra.Command, args []string) {
 	items, err := todo.ReadItems(dataFile)
 	i, err := strconv.Atoi(args[0])
 
@@ -42,8 +43,8 @@ func doneRun(cmd *cobra.Command, args []string) {
 		log.Fatalln(args[0], "is not a valid label\ninvalid syntax")
 	}
 	if i > 0 && i <= len(items) {
-		items[i-1].Done = true
-		fmt.Printf("%q %v\n", items[i-1].Text, "marked done")
+		items[i-1].Done = false
+		fmt.Printf("%q %v\n", items[i-1].Text, "marked undone")
 
 		sort.Sort(todo.ByPri(items))
 		todo.SaveItems(dataFile, items)
@@ -53,15 +54,15 @@ func doneRun(cmd *cobra.Command, args []string) {
 }
 
 func init() {
-	rootCmd.AddCommand(doneCmd)
+	rootCmd.AddCommand(undoneCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// doneCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// undoneCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// doneCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// undoneCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
