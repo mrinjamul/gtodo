@@ -17,6 +17,7 @@ limitations under the License.
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"sort"
 	"strconv"
@@ -36,8 +37,10 @@ var modifyCmd = &cobra.Command{
 
 func modifyRun(cmd *cobra.Command, args []string) {
 	if len(args) == 0 {
+		fmt.Println("Usage: gtodo modify [task id] [new]")
 		log.Fatalln("Too short argument")
 	} else if len(args) == 1 {
+		fmt.Println("Usage: gtodo modify [task id] [new]")
 		log.Fatalln("todo name is empty")
 	} else if len(args) > 2 {
 		log.Fatalln("Too much arguments")

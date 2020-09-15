@@ -18,6 +18,7 @@ package cmd
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 
 	"github.com/mrinjamul/gtodo/todo"
 	"github.com/spf13/cobra"
@@ -33,6 +34,10 @@ var addCmd = &cobra.Command{
 }
 
 func addRun(cmd *cobra.Command, args []string) {
+	if len(args) == 0 {
+		fmt.Println("Usage: gtodo add [task]")
+		log.Fatalln("Too short argument")
+	}
 	items, err := todo.ReadItems(dataFile)
 	if err != nil {
 		file := []byte("[]")

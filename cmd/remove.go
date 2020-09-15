@@ -36,6 +36,10 @@ var removeCmd = &cobra.Command{
 }
 
 func removeRun(cmd *cobra.Command, args []string) {
+	if len(args) == 0 {
+		fmt.Println("Usage: gtodo remove [tasks id]")
+		log.Fatalln("Too short argument")
+	}
 	items, err := todo.ReadItems(dataFile)
 	i, err := strconv.Atoi(args[0])
 

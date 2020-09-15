@@ -36,6 +36,10 @@ var undoneCmd = &cobra.Command{
 }
 
 func undoneRun(cmd *cobra.Command, args []string) {
+	if len(args) == 0 {
+		fmt.Println("Usage: gtodo undone [task id]")
+		log.Fatalln("Too short argument")
+	}
 	items, err := todo.ReadItems(dataFile)
 	i, err := strconv.Atoi(args[0])
 
