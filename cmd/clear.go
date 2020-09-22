@@ -42,7 +42,7 @@ func clearRun(cmd *cobra.Command, args []string) {
 		fmt.Println("Warning: All todo has been cleared.")
 	} else {
 		var response string
-		fmt.Print("Do you can to clear all todos (y/n) :")
+		fmt.Print("Do you want to clear all todos (y/n) :")
 		fmt.Scanln(&response)
 		switch strings.ToLower(response) {
 		case "y", "yes":
