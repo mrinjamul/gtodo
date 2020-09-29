@@ -17,7 +17,6 @@ package cmd
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/mrinjamul/gtodo/todo"
 	"github.com/spf13/cobra"
@@ -40,21 +39,17 @@ func clearRun(cmd *cobra.Command, args []string) {
 		}
 		fmt.Println("Warning: All todo has been cleared.")
 	} else {
-		var response string
-		fmt.Print("Do you want to clear all todos (y/n) :")
-		fmt.Scanln(&response)
-		switch strings.ToLower(response) {
-		case "y", "yes":
+		response := todo.ConfirmPrompt("Do you want to clear all todos")
+		if response {
 			err := todo.SaveItems(dataFile, items)
 			if err != nil {
 				fmt.Printf("%v", err)
 			}
 			fmt.Println("Warning: All todo has been cleared.")
-		case "n", "no":
-			fmt.Println("Operation Canceled")
-		default:
+		} else {
 			fmt.Println("Operation Canceled")
 		}
+
 	}
 }
 

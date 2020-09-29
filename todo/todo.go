@@ -31,7 +31,7 @@ type Item struct {
 	Done     bool
 }
 
-var version string = "v0.2.1"
+var version string = "v0.2.2"
 
 // GetVersion : returns version info
 func GetVersion() string {

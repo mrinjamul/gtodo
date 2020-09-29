@@ -1,4 +1,4 @@
-# gtodo : A simple todo list application
+# gtodo : A simple todoist application
 
 gtodo will help you get more done in less time.
 It's designed to be as simple as possible to help you
@@ -47,7 +47,8 @@ Download for your platform
 For Linux,
 
 ```sh
-unzip gtodo-linux-[whatever].zip
+wget https://github.com/mrinjamul/gtodo/releases/download/v0.2.2/gtodo-linux-amd64-v0.2.2.zip
+unzip gtodo-linux-amd64-v0.2.2.zip
 chmod +x gtodo
 sudo mv gtodo /usr/bin
 ```
@@ -60,8 +61,8 @@ You need to have `zip unzip wget`. To install simply type `pkg install zip unzip
 
 ```sh
 cd ~
-wget https://github.com/mrinjamul/gtodo/releases/download/v0.2.1/gtodo-linux-arm-v0.2.1.zip
-unzip gtodo-linux-arm-v0.2.1.zip
+wget https://github.com/mrinjamul/gtodo/releases/download/v0.2.2/gtodo-linux-arm-v0.2.2.zip
+unzip gtodo-linux-arm-v0.2.2.zip
 chmod +x gtodo
 mv gtodo ../usr/bin
 ```
@@ -104,7 +105,7 @@ command and flag definitions are needed.
 
 ## Links
 
-[Repo Website]()
+[Repo Website](https://mrinjamul.github.io/gtodo/)
 
 ## License
 
