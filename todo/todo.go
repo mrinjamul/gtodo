@@ -1,4 +1,4 @@
-/*
+/*Package todo ...
 Copyright © 2020 Injamul Mohammad Mollah
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +17,10 @@ package todo
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"strconv"
+	"strings"
 )
 
 // Item : structure
@@ -126,4 +128,20 @@ func (i *Item) PrettyDone() string {
 // RemoveItem removes todo from list
 func RemoveItem(slice []Item, s int) []Item {
 	return append(slice[:s], slice[s+1:]...)
+}
+
+// ConfirmPrompt will prompt to user for yes or no
+func ConfirmPrompt(message string) bool {
+	var response string
+	fmt.Print(message + " (yes/no) :")
+	fmt.Scanln(&response)
+
+	switch strings.ToLower(response) {
+	case "y", "yes":
+		return true
+	case "n", "no":
+		return false
+	default:
+		return false
+	}
 }
