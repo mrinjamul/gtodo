@@ -18,6 +18,7 @@ package cmd
 import (
 	"fmt"
 	"log"
+	"os"
 	"sort"
 	"strconv"
 
@@ -34,27 +35,57 @@ var removeCmd = &cobra.Command{
 	Run:     removeRun,
 }
 
+// remove subcommad func
 func removeRun(cmd *cobra.Command, args []string) {
-	if len(args) == 0 {
-		fmt.Println("Usage: gtodo remove [tasks id]")
-		log.Fatalln("Too short argument")
-	}
-	items, err := todo.ReadItems(dataFile)
-	i, err := strconv.Atoi(args[0])
+	// remove only done tasks func
+	if doOpt {
+		response := todo.ConfirmPrompt("Do you want to remove all undone task(s)?")
+		if response {
+			items, err := todo.ReadItems(dataFile)
+			var undoneItems []todo.Item
+			if err != nil {
+				fmt.Println("Something went wrong!")
+				os.Exit(0)
+			}
+			for i, item := range items {
+				if !items[i].Done {
+					undoneItems = append(undoneItems, item)
+				}
+				if items[i].Done {
+					text := items[i].Text
+					fmt.Println("- " + "\"" + strconv.Itoa(i) + ". " + text + "\"" + " has been removed")
+				}
+			}
+			sort.Sort(todo.ByPri(undoneItems))
+			todo.SaveItems(dataFile, undoneItems)
+		}
+	} else { // Remove one by one
+		if len(args) == 0 {
+			fmt.Println("Usage: gtodo remove [tasks id]")
+			log.Fatalln("Too short argument")
+		}
+		items, err := todo.ReadItems(dataFile)
+		i, err := strconv.Atoi(args[0])
 
-	if err != nil {
-		log.Fatalln(args[0], "is not a valid label\ninvalid syntax")
-	}
-	if i > 0 && i <= len(items) {
-		text := items[i-1].Text
-		items = todo.RemoveItem(items, i-1)
-		fmt.Println("- " + "\"" + strconv.Itoa(i) + ". " + text + "\"" + " has been removed")
-		sort.Sort(todo.ByPri(items))
-		todo.SaveItems(dataFile, items)
-	} else {
-		log.Println(i, "doesn't match any items")
+		if err != nil {
+			log.Fatalln(args[0], "is not a valid label\ninvalid syntax")
+		}
+		if i > 0 && i <= len(items) {
+			text := items[i-1].Text
+			items = todo.RemoveItem(items, i-1)
+			fmt.Println("- " + "\"" + strconv.Itoa(i) + ". " + text + "\"" + " has been removed")
+			sort.Sort(todo.ByPri(items))
+			todo.SaveItems(dataFile, items)
+		} else {
+			log.Println(i, "doesn't match any items")
+		}
 	}
 }
+
+// flag variables
+var (
+	doOpt bool
+)
 
 func init() {
 	rootCmd.AddCommand(removeCmd)
@@ -68,4 +99,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// removeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	removeCmd.Flags().BoolVarP(&doOpt, "done", "d", false, "remove only done tasks")
 }
