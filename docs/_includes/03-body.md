@@ -96,6 +96,7 @@ command and flag definitions are needed.
     remove, rm
 
     Flags:
+    -d, --done   remove only done tasks
     -h, --help   help for remove
 
     Global Flags:
