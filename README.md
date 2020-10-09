@@ -40,29 +40,28 @@ First, use go get to install the latest version. This command will install the `
 
 #### Installing from Binaries
 
-Download for your platform
+[Download](https://github.com/mrinjamul/gtodo/releases) for your platform
 
-[Download](https://github.com/mrinjamul/gtodo/releases)
 
 For Linux,
 
 ```sh
-wget https://github.com/mrinjamul/gtodo/releases/download/v0.2.2/gtodo-linux-amd64-v0.2.2.zip
-unzip gtodo-linux-amd64-v0.2.2.zip
+wget https://github.com/mrinjamul/gtodo/releases/download/v0.2.4/gtodo-linux-amd64-v0.2.4.zip
+unzip gtodo-linux-amd64-v0.2.4.zip
 chmod +x gtodo
 sudo mv gtodo /usr/bin
 ```
 
 or you can put the executable file into your env variables `$PATH`
 
-For Termux,
+For Android(Termux),
 
 You need to have `zip unzip wget`. To install simply type `pkg install zip unzip wget`
 
 ```sh
 cd ~
-wget https://github.com/mrinjamul/gtodo/releases/download/v0.2.2/gtodo-linux-arm-v0.2.2.zip
-unzip gtodo-linux-arm-v0.2.2.zip
+wget https://github.com/mrinjamul/gtodo/releases/download/v0.2.4/gtodo-linux-arm-v0.2.4.zip
+unzip gtodo-linux-arm-v0.2.4.zip
 chmod +x gtodo
 mv gtodo ../usr/bin
 ```
