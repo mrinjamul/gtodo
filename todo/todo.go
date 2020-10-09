@@ -19,6 +19,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -31,7 +32,7 @@ type Item struct {
 	Done     bool
 }
 
-var version string = "v0.2.2"
+var version string = "v0.2.4"
 
 // GetVersion : returns version info
 func GetVersion() string {
@@ -144,4 +145,27 @@ func ConfirmPrompt(message string) bool {
 	default:
 		return false
 	}
+}
+
+// SortSlice sort arrays
+func SortSlice(slice []int) []int {
+	sort.Slice(slice, func(i, j int) bool { return slice[i] > slice[j] })
+	return slice
+}
+
+// RemoveDuplicate removes duplicate from slice
+func RemoveDuplicate(slice []int) []int {
+	keys := make(map[int]bool)
+	list := []int{}
+
+	// If the key(values of the slice) is not equal
+	// to the already present value in new slice (list)
+	// then we append it. else we jump on another element.
+	for _, entry := range slice {
+		if _, value := keys[entry]; !value {
+			keys[entry] = true
+			list = append(list, entry)
+		}
+	}
+	return list
 }

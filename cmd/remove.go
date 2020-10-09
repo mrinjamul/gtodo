@@ -39,7 +39,7 @@ var removeCmd = &cobra.Command{
 func removeRun(cmd *cobra.Command, args []string) {
 	// remove only done tasks func
 	if doOpt {
-		response := todo.ConfirmPrompt("Do you want to remove all undone task(s)?")
+		response := todo.ConfirmPrompt("Do you want to remove all done task(s)?")
 		if response {
 			items, err := todo.ReadItems(dataFile)
 			var undoneItems []todo.Item
@@ -65,19 +65,36 @@ func removeRun(cmd *cobra.Command, args []string) {
 			log.Fatalln("Too short argument")
 		}
 		items, err := todo.ReadItems(dataFile)
-		i, err := strconv.Atoi(args[0])
-
 		if err != nil {
-			log.Fatalln(args[0], "is not a valid label\ninvalid syntax")
+			fmt.Println("Failed to get todo lists")
+			os.Exit(1)
 		}
-		if i > 0 && i <= len(items) {
-			text := items[i-1].Text
-			items = todo.RemoveItem(items, i-1)
-			fmt.Println("- " + "\"" + strconv.Itoa(i) + ". " + text + "\"" + " has been removed")
-			sort.Sort(todo.ByPri(items))
-			todo.SaveItems(dataFile, items)
-		} else {
-			log.Println(i, "doesn't match any items")
+
+		// create  remove lists for batch remove purpose
+		var rmList = []int{}
+
+		for arg := 0; arg < len(args); arg++ {
+			i, err := strconv.Atoi(args[arg])
+
+			if err != nil {
+				fmt.Println(args[arg] + " is not a valid id\ninvalid syntax")
+				os.Exit(0)
+			}
+			rmList = append(rmList, i)
+		}
+		// sort and remove duplicate
+		rmList = todo.SortSlice(rmList)
+		rmList = todo.RemoveDuplicate(rmList)
+		for _, i := range rmList {
+			if i > 0 && i <= len(items) {
+				text := items[i-1].Text
+				items = todo.RemoveItem(items, i-1)
+				fmt.Println("- " + "\"" + strconv.Itoa(i) + ". " + text + "\"" + " has been removed")
+				sort.Sort(todo.ByPri(items))
+				todo.SaveItems(dataFile, items)
+			} else {
+				log.Println(i, "doesn't match any items")
+			}
 		}
 	}
 }

@@ -90,7 +90,7 @@ command and flag definitions are needed.
     Remove will remove a todo item from the list by Label(index)
 
     Usage:
-    gtodo remove [flags]
+    gtodo remove [id1] [id2] ...
 
     Aliases:
     remove, rm
